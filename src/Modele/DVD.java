@@ -15,7 +15,7 @@ public class DVD extends Video {
     }
 
     public void lire() {
-        return "Prenez le DVD " + this.numero + "\"" + this.titre + "\" et insérez-le dans un lecteur zone " + this.zone + ".";
+        System.out.println("Prenez le DVD " + this.numero + "\"" + this.titre + "\" et insérez-le dans un lecteur zone " + this.zone + ".");
     }
 
     public String getNumero() {

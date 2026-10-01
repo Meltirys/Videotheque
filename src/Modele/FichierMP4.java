@@ -3,7 +3,7 @@ package Modele;
 import java.time.LocalDate;
 import java.util.List;
 
-public class FichierMP4 extends FichierVideo{
+public class FichierMP4 extends FichierVideo {
 
 
     public FichierMP4(String titre, int duree, LocalDate dateSortie, String realisateur, String chemin) {
