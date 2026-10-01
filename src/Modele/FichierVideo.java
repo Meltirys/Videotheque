@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public abstract class FichierVideo extends Video implements Convertible {
     private String chemin;
@@ -20,8 +18,8 @@ public abstract class FichierVideo extends Video implements Convertible {
     }
 
     public void lire() throws LectureImpossibleException {
-        File f = getFichier();
-        if (!f.exists()) {
+        File f = getFichier(); // créer l'objet File
+        if (!f.exists()) { // si il n'exciste pas exception
             throw new LectureImpossibleException("Fichier introuvable");
         }
 
@@ -32,12 +30,10 @@ public abstract class FichierVideo extends Video implements Convertible {
             throw new ConversionImpossibleException("La vidéo est déjà au fomrat cible " + formatCible);
         }
 
-        // prend le fichier sans extension ".mp4"
-        Path p = Paths.get(chemin);
-        String nomSansExtension = p.getFileName().toString().replaceFirst("[.][^.]+$", "");
+        // rempalce ex: ".mp4" par ".avi"
         String cheminSortie = chemin.replace("." + getSupport().toLowerCase(), "." + formatCible.toLowerCase());
 
-        // prend les infos du nouvel Objet "cible"
+        //  prend les infos du nouvel Objet "cible"
         FichierVideo cible;
         switch (formatCible.toLowerCase()) {
             case "mp4":

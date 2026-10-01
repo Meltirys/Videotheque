@@ -9,7 +9,7 @@ public class DVD extends Video {
     private String numero;
     private int zone;
 
-    DVD(String titre, int duree, LocalDate dateSortie, String realisateur, String numero, int zone) {
+    public DVD(String titre, int duree, LocalDate dateSortie, String realisateur, String numero, int zone) {
         super(titre, duree, dateSortie, realisateur);
         this.numero = numero;
         this.zone = zone;

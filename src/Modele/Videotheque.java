@@ -7,14 +7,11 @@ import java.util.ArrayList;
 
 public class Videotheque implements GestionVideotheque {
 
-    private static ArrayList<Video> videotheque =new ArrayList<>();
+    private static ArrayList<Video> videotheque = new ArrayList<>();
 
     public static ArrayList<Video> getVideotheque() {
         return videotheque;
     }
-
-
-
 
     @Override
     public void listerVideo() throws VideothequeVideException {
