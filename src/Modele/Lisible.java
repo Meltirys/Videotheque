@@ -2,5 +2,5 @@ package Modele;
 
 public interface Lisible {
 
-    void lire();
+    void lire() throws LectureImpossibleException;
 }

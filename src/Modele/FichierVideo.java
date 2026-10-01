@@ -3,7 +3,6 @@ package Modele;
 import Exceptions.ConversionImpossibleException;
 import Exceptions.LectureImpossibleException;
 import Modele.Abstract.Video;
-import Outils.Ffmpeg;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public abstract class FichierVideo extends Video implements Convertible, Runnable {
+public abstract class FichierVideo extends Video implements Convertible {
     private String chemin;
 
     public FichierVideo(String titre, int duree, LocalDate dateSortie, String realisateur, String chemin) {
@@ -25,9 +24,7 @@ public abstract class FichierVideo extends Video implements Convertible, Runnabl
         if (!f.exists()) {
             throw new LectureImpossibleException("Fichier introuvable");
         }
-        Thread t = new Thread(this);
-        t.setDaemon(true);
-        t.start();
+
     }
 
     public FichierVideo convertir(String formatCible) {
@@ -55,11 +52,11 @@ public abstract class FichierVideo extends Video implements Convertible, Runnabl
 
         //Lancer ffmpeg avec les options du format "cible"
         int retourffmpeg = 1;
-        try {
+        /*try {
             retourffmpeg = Ffmpeg.convertir(getFichier(), cible.getFichier(), cible.optionsEncodage());
         } catch (IOException | InterruptedException e) {
             throw new ConversionImpossibleException("La conversion n'a pas pu être lancée !");
-        }
+        }*/
 
         if (retourffmpeg != 0) {
             throw new ConversionImpossibleException("La conversion a échouée !");
@@ -79,7 +76,7 @@ public abstract class FichierVideo extends Video implements Convertible, Runnabl
         this.chemin = chemin;
     }
 
-    public java.io.File getFichier() {
-        return new java.io.File(chemin);
+    public File getFichier() {
+        return new File(chemin);
     }
 }
