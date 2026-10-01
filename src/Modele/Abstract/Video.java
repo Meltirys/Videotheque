@@ -1,8 +1,10 @@
 package Modele.Abstract;
 
+import Modele.Lisible;
+
 import java.time.LocalDate;
 
-public abstract class Video {
+public abstract class Video implements Lisible {
 
     protected String titre;
     protected String realisateur;

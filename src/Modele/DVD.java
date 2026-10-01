@@ -8,10 +8,14 @@ public class DVD extends Video {
     private String numero;
     private int zone;
 
-    public DVD(String titre, String realisateur, LocalDate dateSortie, int duree, String numero, int zone) {
-        super(titre, realisateur, dateSortie, duree);
+    DVD(String titre, int duree, LocalDate dateSortie, String realisateur, String numero, int zone) {
+        super(titre, duree, dateSortie, realisateur);
         this.numero = numero;
         this.zone = zone;
+    }
+
+    public void lire() {
+        return "Prenez le DVD " + this.numero + "\"" + this.titre + "\" et insérez-le dans un lecteur zone " + this.zone + ".";
     }
 
     public String getNumero() {
@@ -28,6 +32,11 @@ public class DVD extends Video {
 
     public void setZone(int zone) {
         this.zone = zone;
+    }
+
+    @Override
+    public String getSupport() {
+        return "";
     }
 
     @Override
