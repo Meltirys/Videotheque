@@ -1,5 +1,6 @@
 package Modele;
 
+import Exceptions.LectureImpossibleException;
 import Modele.Abstract.Video;
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ public class DVD extends Video {
         this.zone = zone;
     }
 
-    public void lire() {
+    public void lire() throws LectureImpossibleException {
         System.out.println("Prenez le DVD " + this.numero + "\"" + this.titre + "\" et insérez-le dans un lecteur zone " + this.zone + ".");
     }
 

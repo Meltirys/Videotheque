@@ -52,7 +52,8 @@ public class Videotheque implements GestionVideotheque {
     @Override
     public void lireVideo(String titre) throws VideoIntrouvableException, VideothequeVideException, LectureImpossibleException {
 
-        rechercherVideo(titre);//nom de la méthode pour lire ?
+        System.out.println(titre);
+
     }
 
     @Override
@@ -63,5 +64,18 @@ public class Videotheque implements GestionVideotheque {
         if(!(video instanceof Convertible)) {
             throw new ConversionImpossibleException("La vidéo ne peut pas être convertie");
         }
+    }
+
+    @Override
+    public void ajouterVideo(Video v) throws VideoIntrouvableException, VideoDejaExistanteException  {
+
+        try {
+            rechercherVideo(v.getTitre());
+        } catch (VideoIntrouvableException | VideoDejaExistanteException e) {
+            videotheque.add(v);
+            System.out.println("Votre video a été ajouté avec succès!");
+            return;
+        }
+        throw new VideoDejaExistanteException("Cette video existe déjà");
     }
 }

@@ -29,8 +29,4 @@ public class FichierAVI extends FichierVideo {
         return "AVI";
     }
 
-    @Override
-    public void run() {
-
-    }
 }

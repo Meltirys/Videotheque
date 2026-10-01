@@ -5,6 +5,8 @@ import Modele.Abstract.Video;
 
 public interface GestionVideotheque {
 
+    void ajouterVideo(Video v) throws VideoDejaExistanteException, SaisieInvalideException;
+
     void listerVideo() throws VideothequeVideException;
 
     Video rechercherVideo(String titre) throws VideothequeVideException, VideoIntrouvableException;
@@ -15,4 +17,5 @@ public interface GestionVideotheque {
 
     void convertirVideo(String titre, String formatCible)
             throws VideoIntrouvableException, VideothequeVideException, ConversionImpossibleException, SaisieInvalideException;
+
 }
