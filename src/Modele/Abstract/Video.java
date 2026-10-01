@@ -1,5 +1,6 @@
 package Modele.Abstract;
 
+import Exceptions.LectureImpossibleException;
 import Modele.Lisible;
 
 import java.time.LocalDate;
@@ -10,6 +11,8 @@ public abstract class Video implements Lisible {
     protected String realisateur;
     protected LocalDate dateSortie;
     protected int duree;
+
+    public abstract void lire() throws LectureImpossibleException;
 
     public Video(String titre, int duree, LocalDate dateSortie, String realisateur) {
         this.titre = titre;
