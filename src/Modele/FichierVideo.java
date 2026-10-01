@@ -3,7 +3,6 @@ package Modele;
 import Exceptions.ConversionImpossibleException;
 import Exceptions.LectureImpossibleException;
 import Modele.Abstract.Video;
-import Outils.Ffmpeg;
 
 import java.io.File;
 import java.io.IOException;

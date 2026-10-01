@@ -1,8 +1,7 @@
 import Exceptions.SaisieInvalideException;
 import Exceptions.VideoDejaExistanteException;
+import Modele.*;
 import Modele.Abstract.Video;
-import Modele.GestionVideotheque;
-import Modele.Videotheque;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -87,7 +86,7 @@ public class Main {
 
     }
 
-    public int dureeVideo() {
+    public int saisieDureeVideo() {
 
         System.out.println("Saisissez la durée");
         int duree = scanner.nextInt();
@@ -100,7 +99,7 @@ public class Main {
         return duree;
     }
 
-    public LocalDate dateSortie() throws DataFormatException {
+    public LocalDate saisieDateSortie() throws DataFormatException {
 
         System.out.println("Saisissez une date");
         String date = scanner.nextLine();
@@ -112,7 +111,7 @@ public class Main {
         return LocalDate.parse(date, formatter);
     }
 
-    public String realisateur() {
+    public String saisieRealisateur() throws SaisieInvalideException {
 
         System.out.println("Saisissez le nom du réalisateur");
         String realisateur = scanner.nextLine();
@@ -121,6 +120,73 @@ public class Main {
         }
         return realisateur;
     }
+
+    public String saisieChemin()  throws SaisieInvalideException {
+        System.out.println("Saisissez le chemin de la vidéo !");
+        String chemin = scanner.nextLine();
+        if (chemin.isEmpty()) {
+            throw new SaisieInvalideException("Veuillez saisir le chemin de la vidéo !");
+        }
+        return chemin;
+    }
+
+    public String saisieNumero()  throws SaisieInvalideException {
+        System.out.println("Saisissez le numéro de DVD ex : DVD-010");
+        String numero = scanner.nextLine();
+        if (numero.isEmpty()) {
+            throw new SaisieInvalideException("Veuillez saisir le numéro de DVD !");
+        }
+        return numero;
+    }
+
+    public int saisieZone() {
+        System.out.println("Saisissez la zone géographique du DVD");
+        int zone = scanner.nextInt();
+        scanner.nextInt();
+        if (zone <= 0 ) {
+            throw  new SaisieInvalideException("Il faut saisir une durée!");
+        }
+        return zone;
+    }
+
+        public DVD CreerDVD () throws SaisieInvalideException, DataFormatException {
+            String titre = saisieTitre();
+            int duree = saisieDureeVideo();
+            LocalDate dateSortie = saisieDateSortie();
+            String realisateur = saisieRealisateur();
+            String numero = saisieNumero();
+            int zone = saisieZone();
+
+            DVD dvd = new DVD(titre, duree, dateSortie, realisateur, numero, zone);
+            return dvd;
+
+        }
+
+        public FichierMP4 CreerMP4 () throws SaisieInvalideException, DataFormatException {
+            String titre = saisieTitre();
+            int duree = saisieDureeVideo();
+            LocalDate dateSortie = saisieDateSortie();
+            String realisateur = saisieRealisateur();
+            String chemin = saisieChemin();
+
+            FichierMP4 fichierMP4 = new FichierMP4(titre, duree, dateSortie, realisateur, chemin);
+            return fichierMP4;
+        }
+
+        public FichierAVI CreerAVI () throws SaisieInvalideException, DataFormatException {
+            String titre = saisieTitre();
+            int duree = saisieDureeVideo();
+            LocalDate dateSortie = saisieDateSortie();
+            String realisateur = saisieRealisateur();
+            String chemin = saisieChemin();
+
+            FichierAVI fichierAVI = new FichierAVI(titre, duree, dateSortie, realisateur, chemin);
+            return fichierAVI;
+        }
+
+
+
+
 
     public void ajouterVideo() throws SaisieInvalideException, VideoDejaExistanteException {
 
@@ -131,13 +197,13 @@ public class Main {
 
         switch (choix) {
             case 1:
-                create = creerDVD();
+                create = CreerDVD();
                 break;
             case 2:
-                create = creerMP4();
+                create = CreerMP4();
                 break;
             case 3:
-                create = creerAVI();
+                create = CreerAVI();
                 break;
             default:
         }
