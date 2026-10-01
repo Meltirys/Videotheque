@@ -1,5 +1,7 @@
 package Modele;
 
+import Exceptions.ConversionImpossibleException;
+
 public interface Convertible {
 
     // Convertir au format MP4 ou AVI et renvoi le nouvel objet.
