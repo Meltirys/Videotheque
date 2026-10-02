@@ -1,6 +1,7 @@
 package Modele;
 
 import Exceptions.ConversionImpossibleException;
+import Exceptions.SaisieInvalideException;
 
 public interface Convertible {
 

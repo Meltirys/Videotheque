@@ -36,6 +36,7 @@ public class Main {
                 afficherMenu();
                 System.out.println("Choix: ");
                 choix = scanner.nextInt();
+                scanner.nextLine();
 
                 switch (choix) {
                     case 1:
@@ -51,10 +52,10 @@ public class Main {
                         supprimerVideo();
                         break;
                     case 5:
-
+                        lireVideo();
                         break;
                     case 6:
-
+                        convertirVideo();
                         break;
                     case 0:
                         System.out.println("Au revoir !");
@@ -73,7 +74,7 @@ public class Main {
 
     }
 
-    public String saisieTitre() {
+    public static String saisieTitre() {
 
 
         System.out.println("Saisissez le nom du titre");
@@ -86,7 +87,7 @@ public class Main {
 
     }
 
-    public int saisieDureeVideo() {
+    public static int saisieDureeVideo() {
 
         System.out.println("Saisissez la durée");
         int duree = scanner.nextInt();
@@ -99,7 +100,7 @@ public class Main {
         return duree;
     }
 
-    public LocalDate saisieDateSortie() throws DataFormatException {
+    public static LocalDate saisieDateSortie() throws DataFormatException {
 
         System.out.println("Saisissez une date");
         String date = scanner.nextLine();
@@ -111,7 +112,7 @@ public class Main {
         return LocalDate.parse(date, formatter);
     }
 
-    public String saisieRealisateur() throws SaisieInvalideException {
+    public static String saisieRealisateur() throws SaisieInvalideException {
 
         System.out.println("Saisissez le nom du réalisateur");
         String realisateur = scanner.nextLine();
@@ -121,7 +122,7 @@ public class Main {
         return realisateur;
     }
 
-    public String saisieChemin()  throws SaisieInvalideException {
+    public static String saisieChemin()  throws SaisieInvalideException {
         System.out.println("Saisissez le chemin de la vidéo !");
         String chemin = scanner.nextLine();
         if (chemin.isEmpty()) {
@@ -130,7 +131,7 @@ public class Main {
         return chemin;
     }
 
-    public String saisieNumero()  throws SaisieInvalideException {
+    public static String saisieNumero()  throws SaisieInvalideException {
         System.out.println("Saisissez le numéro de DVD ex : DVD-010");
         String numero = scanner.nextLine();
         if (numero.isEmpty()) {
@@ -139,7 +140,7 @@ public class Main {
         return numero;
     }
 
-    public int saisieZone() {
+    public static int saisieZone() {
         System.out.println("Saisissez la zone géographique du DVD");
         int zone = scanner.nextInt();
         scanner.nextInt();
@@ -149,7 +150,7 @@ public class Main {
         return zone;
     }
 
-        public DVD CreerDVD () throws SaisieInvalideException, DataFormatException {
+        public static DVD CreerDVD () throws SaisieInvalideException, DataFormatException {
             String titre = saisieTitre();
             int duree = saisieDureeVideo();
             LocalDate dateSortie = saisieDateSortie();
@@ -162,7 +163,7 @@ public class Main {
 
         }
 
-        public FichierMP4 CreerMP4 () throws SaisieInvalideException, DataFormatException {
+        public static FichierMP4 CreerMP4 () throws SaisieInvalideException, DataFormatException {
             String titre = saisieTitre();
             int duree = saisieDureeVideo();
             LocalDate dateSortie = saisieDateSortie();
@@ -173,7 +174,7 @@ public class Main {
             return fichierMP4;
         }
 
-        public FichierAVI CreerAVI () throws SaisieInvalideException, DataFormatException {
+        public static FichierAVI CreerAVI () throws SaisieInvalideException, DataFormatException {
             String titre = saisieTitre();
             int duree = saisieDureeVideo();
             LocalDate dateSortie = saisieDateSortie();
@@ -188,10 +189,12 @@ public class Main {
 
 
 
-    public void ajouterVideo() throws SaisieInvalideException, VideoDejaExistanteException {
+
+    public static void ajouterVideo() throws SaisieInvalideException, VideoDejaExistanteException, DataFormatException {
 
         System.out.println("Type de format (1= DVD, 2= MP4, 3= AVI) : ");
         int choix = scanner.nextInt();
+        scanner.nextLine();
 
         Video create = null;
 
@@ -209,6 +212,31 @@ public class Main {
         }
 
         videotheque.ajouterVideo(create);
+    }
+
+    public static void rechercherVideo() throws Exception {
+        String titre = saisieTitre();
+        videotheque.rechercherVideo(titre);
+    }
+
+    public static void supprimerVideo() throws Exception {
+        String titre = saisieTitre();
+        videotheque.supprimerVideo(titre);
+        System.out.println(">> Vidéo supprimée.");
+    }
+
+    public static void lireVideo() throws Exception {
+        String titre = saisieTitre();
+        videotheque.lireVideo(titre);
+    }
+
+    public static void convertirVideo() throws Exception {
+        String titre = saisieTitre();
+        System.out.print("Format cible (MP4, AVI) : ");
+        String formatCible = scanner.nextLine();
+        System.out.println(">> Conversion en cours...");
+        videotheque.convertirVideo(titre, formatCible);
+        System.out.println(">> Conversion terminée.");
     }
 
 

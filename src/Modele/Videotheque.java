@@ -36,8 +36,7 @@ public class Videotheque implements GestionVideotheque {
                 return v;
             }
         }
-
-        return null;
+        throw new VideoIntrouvableException("Aucune vidéo ne porte ce titre : " + titre);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class Videotheque implements GestionVideotheque {
     @Override
     public void lireVideo(String titre) throws VideoIntrouvableException, VideothequeVideException, LectureImpossibleException {
 
-        System.out.println(titre);
+        rechercherVideo(titre).lire();
 
     }
 
@@ -67,15 +66,15 @@ public class Videotheque implements GestionVideotheque {
     }
 
     @Override
-    public void ajouterVideo(Video v) throws VideoIntrouvableException, VideoDejaExistanteException  {
+    public void ajouterVideo(Video v) throws VideoIntrouvableException, VideoDejaExistanteException {
 
-        try {
-            rechercherVideo(v.getTitre());
-        } catch (VideoIntrouvableException | VideoDejaExistanteException e) {
-            videotheque.add(v);
-            System.out.println("Votre video a été ajouté avec succès!");
-            return;
+        for (Video videoExistante : getVideotheque()) {
+            if (videoExistante.getTitre().equalsIgnoreCase(v.getTitre())) {
+                throw new VideoDejaExistanteException("Cette video existe déjà");
+            }
         }
-        throw new VideoDejaExistanteException("Cette video existe déjà");
+
+        getVideotheque().add(v);
+        System.out.println("Votre video a été ajouté avec succès!");
     }
 }
